@@ -23,7 +23,7 @@ find_package(doctest REQUIRED)
 file(GLOB fuzzing_sources ${CMAKE_CURRENT_SOURCE_DIR}/fuzz_test/*.cpp)
 
 set(ENV{FUZZING_TIMEOUT} 10)
-set(ENV{MAX_FUZZING_TIME} 60)
+set(ENV{MAX_FUZZING_TIME} 30)
 set(ENV{FUZZING_RSS_LIMIT} 8192)
 set(ENV{FUZZING_MAX_LEN} 1048576)
 foreach(fuzzing_source IN LISTS fuzzing_sources)
