@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 
-project(CyyNaiveLib LANGUAGES CXX)
+project(torch_fuzzing LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 include(cmake/all.cmake)
 
 find_package(Python3 REQUIRED)
@@ -18,8 +19,6 @@ endif()
 
 find_package(Torch REQUIRED)
 
-include(${CMAKE_CURRENT_LIST_DIR}/cmake/fuzzing.cmake)
-
 find_package(doctest REQUIRED)
 file(GLOB fuzzing_sources ${CMAKE_CURRENT_SOURCE_DIR}/fuzz_test/*.cpp)
 
@@ -31,5 +30,5 @@ foreach(fuzzing_source IN LISTS fuzzing_sources)
   get_filename_component(fuzzing_prog ${fuzzing_source} NAME_WE)
   add_executable(fuzz_${fuzzing_prog} ${fuzzing_source})
   target_link_libraries(fuzz_${fuzzing_prog} PRIVATE ${TORCH_LIBRARIES})
-  add_fuzzing(TARGET fuzz_${fuzzing_prog} )
+  add_fuzzing(TARGET fuzz_${fuzzing_prog})
 endforeach()
